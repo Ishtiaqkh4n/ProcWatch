@@ -1,0 +1,56 @@
+{
+  "name": "screen-time-tracker",
+  "version": "1.0.0",
+  "description": "A fully offline desktop app for Linux that tracks screen time per application",
+  "main": "backend/src/main.js",
+  "scripts": {
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "echo 'No build step needed for JS backend'",
+    "build": "npm run build:frontend",
+    "start": "cd backend && npx electron .",
+    "dev": "cd backend && npx electron .",
+    "rebuild": "cd backend && npx -y @electron/rebuild",
+    "pack": "npm run build && npx electron-builder --dir",
+    "dist": "npm run build && npx electron-builder"
+  },
+  "build": {
+    "electronVersion": "33.4.11",
+    "appId": "com.screentimetracker.app",
+    "productName": "Screen Time Tracker",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "backend/src/**/*",
+      "frontend/dist/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/src/migrations.sql",
+        "to": "migrations.sql"
+      }
+    ],
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        }
+      ],
+      "category": "Utility",
+      "icon": "assets/icon"
+    },
+    "asar": true
+  },
+  "dependencies": {
+    "active-win": "^7.0.0",
+    "better-sqlite3": "^12.11.1"
+  },
+  "devDependencies": {
+    "electron-builder": "^26.0.0"
+  }
+}
