@@ -1,0 +1,10 @@
+@tailwind base;
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100 font-sans;
+    scrollbar-width: thin;
+    scrollbar-color: #374151 transparent;
+  }
+}
+@tailwind components;
+@tailwind utilities;
